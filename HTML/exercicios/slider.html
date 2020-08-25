@@ -1,0 +1,116 @@
+<div wm-slider>
+    <p>
+        <img src="https://teleguiado.com/wp-content/uploads/2020/04/michael_scott.jpg"
+        alt="Michael Scott"
+        width="513" height="342"
+        title="Michael Scott com arma">
+    </p>
+    
+    <p>
+    <img src="https://thumbs.gfycat.com/OptimalSharpLeafbird-size_restricted.gif"
+    alt="Gif Michael">
+    </p>
+    
+    <p class="circular">
+    <img src="https://img2.gratispng.com/20180402/ggw/kisspng-steve-carell-michael-scott-the-office-dwight-schru-gangster-5ac235dec544c3.380477141522677214808.jpg" 
+    alt="fallout">
+    </p>
+    
+    <p class="texto">
+    <img src="https://img1.gratispng.com/20180612/kly/kisspng-wad-medani-ahlia-university-finance-businessperson-michael-scott-5b20743ae34968.214381661528853562931.jpg"
+        alt="avatar" height="50" align="left">
+        Texto sbajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbaj
+        bsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbas
+        nbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksns
+        bajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjasashb
+        asbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjas
+        ashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksns
+        bajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkan
+        jksnsbajbsjasashbasbasnbjnjkanjksnsbajbsjasashbasbasnbjnjkanjksn
+    
+    </p>
+    
+    <p class="cidade"></p>
+    
+    <p>
+    <picture>
+        <source srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Fallout_New_Vegas_logo.png/799px-Fallout_New_Vegas_logo.png"
+        media="min-width: 600px">
+        <img src="https://i.redd.it/ay61sqnslra21.jpg" alt="outra">
+    </picture>
+    </p>
+    
+ 
+</div>
+
+<style>
+    p {
+        position: absolute;
+        display: none;
+    }
+    .circular{
+        width: 513;
+        background-color: #444;
+    }
+    .texto{
+        width:600px;
+        background-color: dimgrey;
+    }
+    .texto img{
+        margin-right: 10px;
+    }
+    .cidade{
+        margin: 40px;
+        width: 513px;
+        height: 342px;
+        background-image: url("https://tecnoblog.net/meiobit/wp-content/uploads/2014/07/20140728fallout-new-vegas.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 200%;
+    }
+</style>
+
+<script>
+    function mover(elem, inicio, fim, passo, callback) {
+        const novoInicio = inicio - passo
+        if(novoInicio >= fim) {
+            elem.style.left = novoInicio + 'px'
+            setTimeout(() => mover(elem, novoInicio, fim, passo, callback), 1)
+        } else {
+            callback()
+        }
+    }
+
+    // const p = document.querySelector('[wm-slider] > p')
+    // p.style.display = 'block'
+    // mover(p, 1500, -520, 5, () => {
+    //     console.log('Terminou!!!')
+    // })
+
+    function slider() {
+        const elementos = document.querySelectorAll('[wm-slider] > p')
+        const slides = Array.from(elementos)
+        exibirSlide(slides, slides[0])
+    }
+
+    function exibirSlide(slides, slide) {
+        slide.style.display = 'block'
+
+        const inicio = innerWidth
+        const fim = -slide.clientWidth
+
+        slide.style.left = `${inicio}px`
+
+        mover(slide, inicio, fim, 5, () => {
+            slide.style.display = 'none'
+            exibirSlide(slides, getProximo(slides, slide))
+        })
+    }
+
+    function getProximo(lista, atual) {
+        const i = lista.indexOf(atual) + 1
+        return i < lista.length ? lista[i] : lista[0]
+    }
+
+    slider()
+</script>
